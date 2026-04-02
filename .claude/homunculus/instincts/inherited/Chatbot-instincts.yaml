@@ -1,0 +1,673 @@
+# Instincts generated from https://github.com/fazin-ahamed/Chatbot
+# Generated: 2026-04-02T08:08:48.603Z
+# Version: 2.0
+# NOTE: This file supplements (does not replace) any existing curated instincts.
+# High-confidence manually curated instincts should be preserved alongside these.
+
+---
+id: Chatbot-commit-length
+trigger: "when writing a commit message"
+confidence: 0.6
+domain: git
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Commit Length
+
+## Action
+
+Keep commit messages concise (~43 characters)
+
+## Evidence
+
+- Average commit message length: 43 chars
+- Based on 200 commits
+
+---
+id: Chatbot-naming-files
+trigger: "when creating a new file"
+confidence: 0.8
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Naming Files
+
+## Action
+
+Use camelCase naming convention
+
+## Evidence
+
+- Analyzed file naming patterns in repository
+- Dominant pattern: camelCase
+
+---
+id: Chatbot-import-alias
+trigger: "when importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Import Alias
+
+## Action
+
+Use path aliases (@/, ~/) instead of relative imports
+
+## Evidence
+
+- Import analysis shows alias pattern
+- Example: import { x } from '@/lib/x'
+
+---
+id: Chatbot-export-style
+trigger: "when exporting from a module"
+confidence: 0.7
+domain: code-style
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Export Style
+
+## Action
+
+Prefer named exports
+
+## Evidence
+
+- Export pattern analysis
+- Dominant style: named
+
+---
+id: Chatbot-arch-feature-based
+trigger: "when adding a new feature"
+confidence: 0.85
+domain: architecture
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Arch Feature Based
+
+## Action
+
+Create a new folder in src/features/ with all related code colocated
+
+## Evidence
+
+- Feature-based module organization detected
+- Structure: src/features/[feature-name]/
+
+---
+id: Chatbot-test-framework
+trigger: "when writing tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Test Framework
+
+## Action
+
+Use vitest as the test framework
+
+## Evidence
+
+- Test framework detected: vitest
+- File pattern: *.spec.ts
+
+---
+id: Chatbot-test-naming
+trigger: "when creating a test file"
+confidence: 0.85
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Test Naming
+
+## Action
+
+Name test files using the pattern: *.spec.ts
+
+## Evidence
+
+- File pattern: *.spec.ts
+- Consistent across test files
+
+---
+id: Chatbot-test-types
+trigger: "when planning tests for a feature"
+confidence: 0.7
+domain: testing
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Test Types
+
+## Action
+
+Write unit, integration, e2e tests to match project standards
+
+## Evidence
+
+- Test types detected: unit, integration, e2e
+- Coverage config: no
+
+---
+id: Chatbot-workflow-feature-development
+trigger: "when implementing a new feature"
+confidence: 0.75
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Feature Development
+
+## Action
+
+Follow the feature-development workflow:
+1. Add feature implementation
+2. Add tests for feature
+3. Update documentation
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~5x per month
+- Files: apps/builder/src/app/api/[[...rest]]/*, apps/builder/src/app/api/orpc/[[...rest]]/*, apps/builder/src/app/api/*
+
+---
+id: Chatbot-workflow-move-or-refactor-shared-ui-components
+trigger: "when doing move or refactor shared ui components"
+confidence: 0.65
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Move Or Refactor Shared Ui Components
+
+## Action
+
+Follow the move-or-refactor-shared-ui-components workflow:
+1. Move component file(s) from app-specific location to packages/ui/src/components/
+2. Update or add supporting files (e.g., hooks, icon lists) in packages/ui/
+3. Update all imports/usages in apps/builder and other consumers to use the new shared location
+4. Update or add package.json and tsconfig files as needed
+5. Remove old/duplicate component files from app-specific locations
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~3x per month
+- Files: apps/builder/src/components/*.tsx, apps/builder/src/features/**/components/*.tsx, packages/ui/src/components/*.tsx
+
+---
+id: Chatbot-workflow-add-or-refactor-feature-with-migrations
+trigger: "when doing add or refactor feature with migrations"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Add Or Refactor Feature With Migrations
+
+## Action
+
+Follow the add-or-refactor-feature-with-migrations workflow:
+1. Create or update backend domain/application files in packages/[feature]/src/
+2. Add or update API handlers in apps/builder/src/features/[feature]/api/
+3. Update or create database schema and migration files in packages/prisma/*/schema.prisma and migrations/
+4. Update or add types in apps/builder/src/features/[feature]/types.ts
+5. Add/update React components for UI in apps/builder/src/features/[feature]/components/
+6. Update tsconfig and package.json as needed
+7. Add or update tests in packages/[feature]/src/drivers/orpc/api.test.ts or similar
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: apps/builder/src/features/**/api/*.ts, apps/builder/src/features/**/components/*.tsx, apps/builder/src/features/**/types.ts
+
+---
+id: Chatbot-workflow-package-upgrade-and-lockfile-update
+trigger: "when doing package upgrade and lockfile update"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Package Upgrade And Lockfile Update
+
+## Action
+
+Follow the package-upgrade-and-lockfile-update workflow:
+1. Update package.json in multiple packages (apps and/or packages/*)
+2. Update bun.lock or other lockfile
+3. Update tsconfig or nx.json if needed
+4. Commit all related changes together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: apps/*/package.json, packages/*/package.json, bun.lock
+
+---
+id: Chatbot-workflow-security-or-bugfix-in-multiple-related-files
+trigger: "when doing security or bugfix in multiple related files"
+confidence: 0.7
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Security Or Bugfix In Multiple Related Files
+
+## Action
+
+Follow the security-or-bugfix-in-multiple-related-files workflow:
+1. Identify all affected files (could be helpers, API handlers, UI components, etc.)
+2. Apply fix to each file
+3. Update related package.json or lockfile if needed
+4. Commit all changes together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~4x per month
+- Files: apps/builder/src/features/**/*.ts, apps/builder/src/features/**/*.tsx, packages/*/src/**/*.ts
+
+---
+id: Chatbot-workflow-update-shared-configs-or-tsconfigs
+trigger: "when doing update shared configs or tsconfigs"
+confidence: 0.55
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Update Shared Configs Or Tsconfigs
+
+## Action
+
+Follow the update-shared-configs-or-tsconfigs workflow:
+1. Update tsconfig.lib.json or tsconfig.json in all or most packages
+2. Update root tsconfig.json if needed
+3. Commit all config changes together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~1x per month
+- Files: packages/*/tsconfig.lib.json, packages/*/tsconfig.json, tsconfig.json
+
+---
+id: Chatbot-workflow-add-or-update-shared-skill-or-docs
+trigger: "when doing add or update shared skill or docs"
+confidence: 0.6
+domain: workflow
+source: repo-analysis
+source_repo: https://github.com/fazin-ahamed/Chatbot
+---
+
+# Chatbot Workflow Add Or Update Shared Skill Or Docs
+
+## Action
+
+Follow the add-or-update-shared-skill-or-docs workflow:
+1. Add or update SKILL.md or PRACTICAL-TIPS.md in .agents/skills/[skill]/
+2. Update or add related files in .claude/skills/
+3. Commit all changes together
+
+## Evidence
+
+- Workflow detected from commit patterns
+- Frequency: ~2x per month
+- Files: .agents/skills/*/SKILL.md, .agents/skills/*/PRACTICAL-TIPS.md, .claude/skills/*
+
+---
+id: chatbot-instinct-file-naming-camelCase
+trigger: "When creating or renaming files in the codebase"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct File Naming CamelCase
+
+## Action
+
+Use camelCase for file names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.files: camelCase
+
+---
+id: chatbot-instinct-function-naming-camelCase
+trigger: "When defining new functions"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Function Naming CamelCase
+
+## Action
+
+Name functions using camelCase
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.functions: camelCase
+
+---
+id: chatbot-instinct-class-naming-pascalCase
+trigger: "When defining new classes"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Class Naming PascalCase
+
+## Action
+
+Name classes using PascalCase
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.classes: PascalCase
+
+---
+id: chatbot-instinct-constant-naming-screaming-snake-case
+trigger: "When defining constants"
+confidence: 0.9
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Constant Naming Screaming Snake Case
+
+## Action
+
+Use SCREAMING_SNAKE_CASE for constant names
+
+## Evidence
+
+- Pattern in codeStyle.namingConventions.constants: SCREAMING_SNAKE_CASE
+
+---
+id: chatbot-instinct-import-alias-style
+trigger: "When importing modules"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Import Alias Style
+
+## Action
+
+Use import aliases as defined in tsconfig paths
+
+## Evidence
+
+- Pattern in codeStyle.importStyle: alias
+- Presence of tsconfig.json with paths
+
+---
+id: chatbot-instinct-named-exports
+trigger: "When exporting from a module"
+confidence: 0.85
+domain: code-style
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Named Exports
+
+## Action
+
+Use named exports instead of default exports
+
+## Evidence
+
+- Pattern in codeStyle.exportStyle: named
+
+---
+id: chatbot-instinct-testing-vitest-framework
+trigger: "When writing or updating tests"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Testing Vitest Framework
+
+## Action
+
+Use the Vitest framework for all test files
+
+## Evidence
+
+- Pattern in testing.framework: vitest
+- Presence of vitest.config.ts
+
+---
+id: chatbot-instinct-testing-file-pattern
+trigger: "When naming test files"
+confidence: 0.9
+domain: testing
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Testing File Pattern
+
+## Action
+
+Use the *.spec.ts pattern for test files
+
+## Evidence
+
+- Pattern in testing.filePattern: *.spec.ts
+
+---
+id: chatbot-instinct-testing-types
+trigger: "When adding tests for a feature"
+confidence: 0.8
+domain: testing
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Testing Types
+
+## Action
+
+Include unit, integration, and e2e tests as appropriate
+
+## Evidence
+
+- Pattern in testing.testTypes: unit, integration, e2e
+
+---
+id: chatbot-instinct-git-emoji-prefix
+trigger: "When writing a commit message"
+confidence: 0.9
+domain: git
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Git Emoji Prefix
+
+## Action
+
+Prefix commit messages with an emoji representing the change type (e.g., 🔧, 🐛, 📝)
+
+## Evidence
+
+- Seen in commits: '🔧 Fix cleanArchivedData script performance', '🐛 Fix robots.txt for new domain'
+
+---
+id: chatbot-instinct-git-commit-length
+trigger: "When writing a commit message"
+confidence: 0.8
+domain: git
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Git Commit Length
+
+## Action
+
+Keep commit messages concise, averaging around 40-50 characters
+
+## Evidence
+
+- commits.averageLength: 43
+
+---
+id: chatbot-instinct-workflow-move-shared-ui
+trigger: "When deduplicating or sharing UI components across apps/packages"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Move Shared Ui
+
+## Action
+
+Move components to packages/ui/src/components/, update imports/usages, and remove old copies
+
+## Evidence
+
+- Workflow: move-or-refactor-shared-ui-components
+- Files: apps/builder/src/components/*.tsx, packages/ui/src/components/*.tsx
+
+---
+id: chatbot-instinct-workflow-add-feature-with-migrations
+trigger: "When adding a new core feature or domain model requiring backend, API, and DB changes"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Add Feature With Migrations
+
+## Action
+
+Implement backend logic in packages/[feature]/src/, update API handlers, schema, migrations, types, UI, and tests
+
+## Evidence
+
+- Workflow: add-or-refactor-feature-with-migrations
+- Files: packages/[feature]/src/**/*.ts, packages/prisma/*/schema.prisma
+
+---
+id: chatbot-instinct-workflow-upgrade-packages
+trigger: "When upgrading dependencies across the monorepo"
+confidence: 0.95
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Upgrade Packages
+
+## Action
+
+Update package.json in multiple places, update lockfile, and commit all related changes together
+
+## Evidence
+
+- Workflow: package-upgrade-and-lockfile-update
+- Files: apps/*/package.json, bun.lock
+
+---
+id: chatbot-instinct-workflow-bugfix-multi
+trigger: "When fixing a bug or security issue affecting multiple files/components"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Bugfix Multi
+
+## Action
+
+Identify all affected files, apply fixes, update related package.json or lockfile if needed, and commit together
+
+## Evidence
+
+- Workflow: security-or-bugfix-in-multiple-related-files
+- Files: apps/builder/src/features/**/*.ts, packages/*/src/**/*.ts
+
+---
+id: chatbot-instinct-workflow-update-tsconfigs
+trigger: "When enforcing new TypeScript settings or fixing config inconsistencies across packages"
+confidence: 0.9
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Update Tsconfigs
+
+## Action
+
+Update tsconfig.lib.json or tsconfig.json in all packages and root, then commit together
+
+## Evidence
+
+- Workflow: update-shared-configs-or-tsconfigs
+- Files: packages/*/tsconfig.lib.json, tsconfig.json
+
+---
+id: chatbot-instinct-workflow-update-skill-docs
+trigger: "When documenting or updating agent/AI skills or shared docs"
+confidence: 0.85
+domain: workflow
+source: repo-analysis
+source_repo: fazin-ahamed/Chatbot
+---
+
+# Chatbot Instinct Workflow Update Skill Docs
+
+## Action
+
+Add or update SKILL.md or PRACTICAL-TIPS.md in .agents/skills/[skill]/ and update related files in .claude/skills/
+
+## Evidence
+
+- Workflow: add-or-update-shared-skill-or-docs
+- Files: .agents/skills/*/SKILL.md, .claude/skills/*
+
