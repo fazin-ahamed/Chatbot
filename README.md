@@ -51,3 +51,4 @@ You'll find a lot of resources to help you get started with Typebot in the [docu
 ## Self-hosting
 
 Interested in self-hosting Typebot on your server? Take a look at the [self-hosting installation instructions](https://docs.typebot.io/self-hosting/get-started).
+
